@@ -25,7 +25,8 @@
 Все приложения из последующих заданий должны находиться в этой конфигурации.
 
 ### Решение 2
-https://github.com/SergPonomarev76/netology/Images/2025-05-19_20-05-54.png
+![2025-05-19_20-05-54](Images/2025-05-19_20-05-54.png)
+
 ---
 
 ### Задание 3 
@@ -35,6 +36,10 @@ https://github.com/SergPonomarev76/netology/Images/2025-05-19_20-05-54.png
 1. Создайте конфигурацию docker-compose для Prometheus с именем контейнера <ваши фамилия и инициалы>-netology-prometheus. 
 2. Добавьте необходимые тома с данными и конфигурацией (конфигурация лежит в репозитории в директории [6-04/prometheus](https://github.com/netology-code/sdvps-homeworks/tree/main/lecture_demos/6-04/prometheus) ).
 3. Обеспечьте внешний доступ к порту 9090 c докер-сервера.
+
+
+### Решение 3 
+
 
 ---
 
