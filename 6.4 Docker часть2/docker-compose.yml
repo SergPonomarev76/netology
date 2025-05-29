@@ -1,20 +1,52 @@
 version: '3'
 services:
-  server:
-    build: .
-    command: python snake.py
-    restart: unless-stopped
-  nginx:
-    image: nginx:alpine
-    volumes:
-      - ./onlinesnake.template:/etc/nginx/conf.d/onlinesnake.template
-      - ./web/:/var/www/onlinesnake.fun/
+  prometheus:
+    image: prom/prometheus:v2.47.2
+    container_name: ponomarev-s-v-netology-prometheus
+    command: --web.enable-lifecycle --config.file=/etc/prometheus/prometheus.yml
     ports:
-      - 8080:80
-    command: /bin/sh -c "cat /etc/nginx/conf.d/onlinesnake.template > /etc/nginx/conf.d/default.conf && nginx -g 'daemon off;'"
-  networks:
-    ponomarev-my-netology-hw:
-      driver: bridge
-      ipam:
-       config:
+      - 9090:9090
+    volumes:
+      - ./prometheus:/etc/prometheus
+      - prometheus-data:/prometheus
+    networks:
+      - ponomarev-s-v-netology-hw
+    restart: always
+
+  pushgateway:
+    image: prom/pushgateway:v1.6.2
+    container_name: ponomarev-s-v-netology-pushgateway
+    ports:
+      - 9091:9091
+    networks:
+      - ponomarev-s-v-my-netology-hw
+    depends_on:
+      - prometheus
+    restart: unless-stopped
+
+  grafana:
+     image: grafana/grafana
+     container_name: ponomarev-s-v-netology-grafana
+     environment:
+      GF_PATHS_CONFIG: /etc/grafana/custom.ini
+     ports:
+      - 80:3000
+     volumes:
+      - ./grafana:/etc/grafana
+      - grafana-data:/var/lib/grafana
+     networks:
+      - ponomarev-s-v-my-netology-hw
+     depends_on:
+      - prometheus
+     restart: unless-stopped
+volumes:
+  prometheus-data:
+  grafana-data:
+
+networks:
+  ponomarev-s-v-my-netology-hw:
+    driver: bridge
+    ipam:
+      config:
         - subnet: 10.5.0.0/16
+          gateway: 10.5.0.1
