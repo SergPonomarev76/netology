@@ -44,7 +44,7 @@ volumes:
   grafana-data:
 
 networks:
-  ponomarev-s-v-my-netology-hw:
+  ponomarev-s-v-netology-hw:
     driver: bridge
     ipam:
       config:
