@@ -19,7 +19,7 @@ services:
     ports:
       - 9091:9091
     networks:
-      - ponomarev-s-v-my-netology-hw
+      - ponomarev-s-v-netology-hw
     depends_on:
       - prometheus
     restart: unless-stopped
@@ -35,7 +35,7 @@ services:
       - ./grafana:/etc/grafana
       - grafana-data:/var/lib/grafana
      networks:
-      - ponomarev-s-v-my-netology-hw
+      - ponomarev-s-v-netology-hw
      depends_on:
       - prometheus
      restart: unless-stopped
