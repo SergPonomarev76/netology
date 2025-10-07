@@ -7,6 +7,6 @@
 
 
 ### Решение 1
-![Images](iages1.png)
+![Images](images1.png)
 ---
 
